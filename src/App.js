@@ -7,6 +7,7 @@ import AddToDo from "./components/AddToDo";
 //import uuid from "uuid";
 import About from "./components/pages/About";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 class App extends React.Component {
   state = {

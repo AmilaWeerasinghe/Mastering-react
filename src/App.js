@@ -6,27 +6,18 @@ import Header from "./components/layout/Header";
 import AddToDo from "./components/AddToDo";
 import uuid from "uuid";
 import About from "./components/pages/About";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "take out trash",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "dinner with wife",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "Meeting boss",
-        completed: false
-      }
-    ]
+    todos: []
   };
+
+  componentDidMount() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then(res => this.setState({ todos: res.data }));
+  }
 
   addTodo = title => {
     const newTodos = {

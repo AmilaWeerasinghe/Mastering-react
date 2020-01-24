@@ -4,7 +4,7 @@ import "./App.css";
 import Todos from "./components/Todos";
 import Header from "./components/layout/Header";
 import AddToDo from "./components/AddToDo";
-import uuid from "uuid";
+//import uuid from "uuid";
 import About from "./components/pages/About";
 import axios from "axios";
 
@@ -20,14 +20,16 @@ class App extends React.Component {
   }
 
   addTodo = title => {
-    const newTodos = {
-      id: uuid.v4(),
-      title: title,
-      completed: false
-    };
-    this.setState({
-      todos: [...this.state.todos, newTodos]
-    });
+    axios
+      .post("https://jsonplaceholder.typicode.com/todos", {
+        title,
+        completed: false
+      })
+      .then(res =>
+        this.setState({
+          todos: [...this.state.todos, res.data]
+        })
+      );
   };
 
   markComplete = id => {
